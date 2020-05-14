@@ -6,6 +6,8 @@ import models.*;
 import org.testng.annotations.Test;
 import webdriver.BaseTest;
 
+import io.qameta.allure.*;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -30,92 +32,103 @@ public class CategoryTest extends BaseTest {
     Category categoryAfterUpdate = new Category(titleCategoryAfterUpdate, metaTagTitleCategoryAfterUpdate,
             descriptionCategoryAfterUpdate, topCategory);
 
-    @Test(description = "Проверка создания группы")
+    @Test(description = "Создание категории")
+    @Description(value = "Создание категории")
     public void createGroupTest() {
 
-        AdminLoginForm adminLoginForm = new AdminLoginForm();
-        NavigationMenuForm navigationMenuForm = new NavigationMenuForm();
-        CategoriesForm categoriesForm = new CategoriesForm();
-        CreateCategoryForm createCategoryForm = new CreateCategoryForm();
-
-        // Login
         open("/admin");
+
+        logStep(1, "Login as admin");
+        AdminLoginForm adminLoginForm = new AdminLoginForm();
         adminLoginForm.login(admin);
 
-        // Navigate to categories page
+        logStep(2, "Navigate to categories page");
+        NavigationMenuForm navigationMenuForm = new NavigationMenuForm();
         navigationMenuForm.gotoPage("Catalog", "Categories");
 
-        // Open create category form
+        logStep(3, "Open create category form");
+        CategoriesForm categoriesForm = new CategoriesForm();
         categoriesForm.gotoCreateForm();
 
-        // Fill form
+        logStep(3, "Fill form");
+        CreateCategoryForm createCategoryForm = new CreateCategoryForm();
         createCategoryForm.fillCreateForm(category);
+
+        logStep(4, "Save form");
         createCategoryForm.saveCreateForm();
 
     }
 
     @Test(description = "Проверка отображения категории", dependsOnMethods = "createGroupTest")
+    @Description(value = "")
     public void readCategoryTest() {
-
         open("/");
 
+        logStep(1, "Check that category is visible");
         $(byText(category.getName())).shouldBe(Condition.visible);
-
     }
 
     @Test(description = "Обновление категории", dependsOnMethods = "readCategoryTest")
+    @Description(value = "")
     public void updateCategoryTest() {
 
-        AdminLoginForm adminLoginForm = new AdminLoginForm();
-        NavigationMenuForm navigationMenuForm = new NavigationMenuForm();
-        CategoriesForm categoriesForm = new CategoriesForm();
-        CreateCategoryForm createCategoryForm = new CreateCategoryForm();
-
-        // Login
         open("/admin");
+
+        logStep(1, "Login as admin");
+        AdminLoginForm adminLoginForm = new AdminLoginForm();
         adminLoginForm.login(admin);
 
-        // Navigate to categories page
+        logStep(2, "Navigate to categories page");
+        NavigationMenuForm navigationMenuForm = new NavigationMenuForm();
         navigationMenuForm.gotoPage("Catalog", "Categories");
 
-        // Open create category form
+        logStep(3, "Open create category form");
+        CategoriesForm categoriesForm = new CategoriesForm();
         categoriesForm.gotoCreateForm();
 
-        // Fill form
+        logStep(3, "Fill form");
+        CreateCategoryForm createCategoryForm = new CreateCategoryForm();
         createCategoryForm.fillCreateForm(categoryAfterUpdate);
+
+        logStep(4, "Save form");
         createCategoryForm.saveCreateForm();
 
     }
 
     @Test(description = "Проверка отображения категории после обновления", dependsOnMethods = "updateCategoryTest")
+    @Description(value = "")
     public void readCategoryAfterUpdateTest() {
-
         open("/");
 
+        logStep(1, "Check that category is visible");
         $(byText(categoryAfterUpdate.getName())).shouldBe(Condition.visible);
     }
 
     @Test(description = "Удаление категории", dependsOnMethods = "readCategoryAfterUpdateTest", alwaysRun = true)
+    @Description(value = "")
     public void deleteCategory() {
-        AdminLoginForm adminLoginForm = new AdminLoginForm();
-        NavigationMenuForm navigationMenuForm = new NavigationMenuForm();
 
-        // Login
         open("/admin");
+
+        logStep(1, "Login as admin");
+        AdminLoginForm adminLoginForm = new AdminLoginForm();
         adminLoginForm.login(admin);
 
-        // Navigate to categories page
+        logStep(2, "Navigate to categories page");
+        NavigationMenuForm navigationMenuForm = new NavigationMenuForm();
         navigationMenuForm.gotoPage("Catalog", "Categories");
 
+        logStep(3, "Find category in table");
+
+        logStep(4, "Mark checkbox");
+
+        logStep(5, "Click on delete button");
     }
 
     @Test(description = "Проверка отображения категории после удаления", dependsOnMethods = "deleteCategory")
+    @Description(value = "Проверка отображения категории после удаления")
     public void readCategoryAfterDeleteTest() {
-
         open("/");
-
         $(byText(categoryAfterUpdate.getName())).shouldNotBe(Condition.visible);
-
     }
-
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd'>
+<suite name="Тестовый" verbose="10" parallel="tests" thread-count="1" group-by-instances="false">
+
+    <test name="Создание категории">
+        <parameter name="titleCategory" value=""/>
+        <parameter name="metaTagTitleCategory" value=""/>
+        <parameter name="descriptionCategory" value=""/>
+        <parameter name="topCategory" value="true" />
+        <classes>
+            <class name="tests.CategoryTest"/>
+        </classes>
+    </test>
+
+</suite>

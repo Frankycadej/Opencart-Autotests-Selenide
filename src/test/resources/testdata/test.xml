@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testdata>
+    <admin>
+        <user count='01'>
+            <user_id>1</user_id>
+            <name>John Doe</name>
+            <login>admin</login>
+            <password>GdfkbkrhjDH</password>
+        </user>
+    </admin>
+    <consumer>
+        <user count='01'>
+            <user_id>1</user_id>
+            <name>John Doe</name>
+            <login>admin</login>
+            <password>GdfkbkrhjDH</password>
+        </user>
+    </consumer>
+</testdata>

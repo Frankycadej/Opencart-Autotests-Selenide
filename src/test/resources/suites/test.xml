@@ -3,7 +3,7 @@
 <suite name="Тестовый" verbose="10" parallel="tests" thread-count="1">
 
     <parameter name="rootLink" value="http://opencart.nakoskin.ru"/>
-    <parameter name="browser" value="chrome"/>
+    <parameter name="browser" value="firefox"/>
 
     <parameter name="adminLogin" value="admin"/>
     <parameter name="adminPassword" value="GdfkvkrhjDH"/>

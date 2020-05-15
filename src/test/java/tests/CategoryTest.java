@@ -2,16 +2,17 @@ package tests;
 
 import com.codeborne.selenide.Condition;
 import forms.admin.*;
-import models.*;
+import io.qameta.allure.Description;
+import models.Category;
+import models.User;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import webdriver.BaseTest;
 
-import io.qameta.allure.*;
-
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class CategoryTest extends BaseTest {
 
@@ -20,7 +21,7 @@ public class CategoryTest extends BaseTest {
     Category categoryAfterUpdate;
 
     @BeforeTest
-    @Parameters({ "titleCategory",  "metaTagTitleCategory",  "descriptionCategory", "titleCategoryAfterUpdate",
+    @Parameters({"titleCategory", "metaTagTitleCategory", "descriptionCategory", "titleCategoryAfterUpdate",
             "metaTagTitleCategoryAfterUpdate", "descriptionCategoryAfterUpdate"})
     public void precondition(String titleCategory, String metaTagTitleCategory, String descriptionCategory,
                              String titleCategoryAfterUpdate, String metaTagTitleCategoryAfterUpdate,
@@ -91,7 +92,6 @@ public class CategoryTest extends BaseTest {
 
         logStep(4, "Save form");
         updateCategoryForm.saveCreateForm();
-
     }
 
     @Test(description = "Проверка отображения категории после обновления", dependsOnMethods = "updateCategoryTest")
@@ -130,8 +130,6 @@ public class CategoryTest extends BaseTest {
     @Description(value = "Проверка отображения категории после удаления")
     public void readCategoryAfterDeleteTest() {
         open("/");
-        if (!($(byText(categoryAfterUpdate.getName())).exists())) {
-            System.out.println("hi");
-        }
+        $(byText(categoryAfterUpdate.getName())).exists();
     }
 }

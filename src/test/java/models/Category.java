@@ -2,8 +2,10 @@ package models;
 
 public class Category {
 
-    private String name, metaTagTitle, description;
-    private boolean top = false;
+    private final String name;
+    private final String metaTagTitle;
+    private final String description;
+    private boolean top;
 
     public Category(String name, String metaTagTitle, String description, boolean top) {
         this.name = name;

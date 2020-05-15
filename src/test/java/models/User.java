@@ -2,7 +2,8 @@ package models;
 
 public class User {
 
-    private String login, password;
+    private final String login;
+    private final String password;
 
     public User(String login, String password) {
         this.login = login;

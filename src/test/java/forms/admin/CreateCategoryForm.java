@@ -2,11 +2,12 @@ package forms.admin;
 
 import models.Category;
 import org.openqa.selenium.By;
+import webdriver.BaseForm;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
-public class CreateCategoryForm {
+public class CreateCategoryForm extends BaseForm {
 
     public void fillCreateForm(Category category) {
         $("#input-name1").setValue(category.getName());

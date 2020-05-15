@@ -10,7 +10,7 @@
 
     <test name="Тест логина админом">
         <classes>
-            <class name="tests.admin.LoginTest"></class>
+            <class name="tests.admin.LoginTest"/>
         </classes>
     </test>
 

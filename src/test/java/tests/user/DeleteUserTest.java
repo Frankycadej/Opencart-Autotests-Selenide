@@ -1,4 +1,6 @@
 package tests.user;
 
-public class DeleteUserTest {
+import webdriver.BaseTest;
+
+public class DeleteUserTest extends BaseTest {
 }

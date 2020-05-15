@@ -1,4 +1,8 @@
 package tests.user;
 
-public class LoginTest {
+import webdriver.BaseTest;
+
+public class LoginTest extends BaseTest {
+
+
 }

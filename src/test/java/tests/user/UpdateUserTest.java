@@ -1,4 +1,6 @@
 package tests.user;
 
-public class UpdateUserTest {
+import webdriver.BaseTest;
+
+public class UpdateUserTest extends BaseTest {
 }

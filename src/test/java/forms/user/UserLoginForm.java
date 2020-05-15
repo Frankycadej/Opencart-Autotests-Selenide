@@ -1,4 +1,8 @@
 package forms.user;
 
-public class UserLoginForm {
+import webdriver.BaseForm;
+
+public class UserLoginForm extends BaseForm {
+
+
 }

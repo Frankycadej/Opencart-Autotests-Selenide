@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import webdriver.BaseTest;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -23,11 +24,11 @@ public class LoginTest extends BaseTest  {
         open("/admin");
 
         step("Проверка отображения формы логина");
-        $(byText("Please enter your login details.")).exists();
-        $(byText("Username")).exists();
-        $(byText("Password")).exists();
-        $(byText("Forgotten Password")).exists();
-        $(byText("Login")).exists();
+        $(byText("Please enter your login details.")).shouldHave(text("Please enter your login details."));
+        $(byText("Username")).shouldHave(text("Username"));
+        $(byText("Password")).shouldHave(text("Password"));
+        $(byText("Forgotten Password")).shouldHave(text("Forgotten Password"));
+        $(byText("Login")).shouldHave(text("Login"));
 
         step("Заполнение формы");
         $(By.name("username")).setValue(admin.getLogin());
@@ -37,8 +38,7 @@ public class LoginTest extends BaseTest  {
         $(byText("Login")).click();
 
         step("Проверка успешного логина");
-        $(byText("Dashboard")).exists();
-        $(byText("Navigation")).exists();
-
+        $("div.container-fluid h1").shouldHave(text("Dashboard"));
+        $("#navigation").shouldHave(text("Navigation"));
     }
 }

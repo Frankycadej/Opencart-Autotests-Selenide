@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd'>
-<suite name="Тестовый" verbose="10" parallel="tests" thread-count="1" group-by-instances="false">
+<suite name="Тестовый" verbose="10" parallel="tests" thread-count="1">
+
+    <parameter name="rootLink" value="http://opencart.nakoskin.ru"/>
+    <parameter name="browser" value="chrome"/>
+
+    <parameter name="adminLogin" value="admin"/>
+    <parameter name="adminPassword" value="GdfkvkrhjDH"/>
 
     <test name="Создание категории">
-        <parameter name="titleCategory" value=""/>
-        <parameter name="metaTagTitleCategory" value=""/>
-        <parameter name="descriptionCategory" value=""/>
-        <parameter name="topCategory" value="true" />
+        <parameter name="titleCategory" value="Test category"/>
+        <parameter name="metaTagTitleCategory" value="testMetaTagCategory"/>
+        <parameter name="descriptionCategory" value="Test description"/>
+        <parameter name="titleCategoryAfterUpdate" value="Test category after update"/>
+        <parameter name="metaTagTitleCategoryAfterUpdate" value="Test category after update"/>
+        <parameter name="descriptionCategoryAfterUpdate" value="Test category after update"/>
         <classes>
             <class name="tests.CategoryTest"/>
         </classes>

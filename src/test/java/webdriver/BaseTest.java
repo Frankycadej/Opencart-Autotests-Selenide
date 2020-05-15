@@ -16,13 +16,13 @@ public class BaseTest {
         this.adminLogin = adminLogin;
         this.adminPassword = adminPassword;
         Configuration.baseUrl = rootLink;
+        Configuration.driverManagerEnabled = false;
+        Configuration.remote = "http://localhost:4444/wd/hub";
         Configuration.browser = browser;
         Configuration.startMaximized = true;
         Configuration.timeout = 5000;
     }
 
-    public void logStep(Integer num, String description) {
-        step(num + " " + description);
-    }
+    public void logStep(Integer num, String description) { step(num + " " + description); }
 
 }

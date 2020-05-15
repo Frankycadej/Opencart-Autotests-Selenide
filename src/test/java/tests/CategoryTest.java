@@ -3,6 +3,8 @@ package tests;
 import com.codeborne.selenide.Condition;
 import forms.admin.*;
 import models.*;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import webdriver.BaseTest;
 
@@ -13,24 +15,21 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CategoryTest extends BaseTest {
 
-    private final String login = "admin";
-    private final String password = "GdfkvkrhjDH";
+    User admin;
+    Category category;
+    Category categoryAfterUpdate;
 
-    User admin = new User(login, password);
-
-    private final String titleCategory = "Test category";
-    private final String metaTagTitleCategory = "TestMetaTagTitle";
-    private final String descriptionCategory = "Test Description";
-    private final boolean topCategory = true;
-
-    Category category = new Category(titleCategory, metaTagTitleCategory, descriptionCategory, topCategory);
-
-    private final String titleCategoryAfterUpdate = "Test category after update";
-    private final String metaTagTitleCategoryAfterUpdate = "TestMetaTagTitle after update";
-    private final String descriptionCategoryAfterUpdate = "Test Description after update";
-
-    Category categoryAfterUpdate = new Category(titleCategoryAfterUpdate, metaTagTitleCategoryAfterUpdate,
-            descriptionCategoryAfterUpdate, topCategory);
+    @BeforeTest
+    @Parameters({ "titleCategory",  "metaTagTitleCategory",  "descriptionCategory", "titleCategoryAfterUpdate",
+            "metaTagTitleCategoryAfterUpdate", "descriptionCategoryAfterUpdate"})
+    public void precondition(String titleCategory, String metaTagTitleCategory, String descriptionCategory,
+                             String titleCategoryAfterUpdate, String metaTagTitleCategoryAfterUpdate,
+                             String descriptionCategoryAfterUpdate) {
+        category = new Category(titleCategory, metaTagTitleCategory, descriptionCategory, true);
+        categoryAfterUpdate = new Category(titleCategoryAfterUpdate, metaTagTitleCategoryAfterUpdate,
+                descriptionCategoryAfterUpdate, true);
+        admin = new User(adminLogin, adminPassword);
+    }
 
     @Test(description = "Создание категории")
     @Description(value = "Создание категории")
@@ -82,16 +81,16 @@ public class CategoryTest extends BaseTest {
         NavigationMenuForm navigationMenuForm = new NavigationMenuForm();
         navigationMenuForm.gotoPage("Catalog", "Categories");
 
-        logStep(3, "Open create category form");
+        logStep(3, "Find and mark category's checkbox");
         CategoriesForm categoriesForm = new CategoriesForm();
-        categoriesForm.gotoCreateForm();
+        categoriesForm.findCategoryAndClickOnUpdateBtn(category);
 
         logStep(3, "Fill form");
-        CreateCategoryForm createCategoryForm = new CreateCategoryForm();
-        createCategoryForm.fillCreateForm(categoryAfterUpdate);
+        UpdateCategoryForm updateCategoryForm = new UpdateCategoryForm();
+        updateCategoryForm.fillCreateForm(categoryAfterUpdate);
 
         logStep(4, "Save form");
-        createCategoryForm.saveCreateForm();
+        updateCategoryForm.saveCreateForm();
 
     }
 
@@ -120,16 +119,19 @@ public class CategoryTest extends BaseTest {
 
         logStep(3, "Find category in table and mark it");
         CategoriesForm categoriesForm = new CategoriesForm();
-        categoriesForm.findAndMarkCategory(titleCategoryAfterUpdate);
+        categoriesForm.findAndMarkCategory(categoryAfterUpdate);
 
         logStep(5, "Click on delete button");
         categoriesForm.clickOnDeleteBtn();
+
     }
 
     @Test(description = "Проверка отображения категории после удаления", dependsOnMethods = "deleteCategory")
     @Description(value = "Проверка отображения категории после удаления")
     public void readCategoryAfterDeleteTest() {
         open("/");
-        $(byText(categoryAfterUpdate.getName())).shouldNotBe(Condition.visible);
+        if (!($(byText(categoryAfterUpdate.getName())).exists())) {
+            System.out.println("hi");
+        }
     }
 }

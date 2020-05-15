@@ -1,6 +1,6 @@
 package forms.admin;
 
-import com.codeborne.selenide.Condition;
+import models.Category;
 import org.openqa.selenium.By;
 import webdriver.BaseForm;
 
@@ -18,15 +18,37 @@ public class CategoriesForm extends BaseForm {
         submitAlert();
     }
 
-    public void findAndMarkCategory(String title) {
+    public void findCategoryAndClickOnUpdateBtn(Category category) {
         int countPage = 1;
-        if ($(byText(title)).exists()) {
-            $(By.xpath("//tr[contains(., '" + title + "')]//input[@name=\"selected[]\"]")).click();
-        } else if ($(By.xpath("//ul[@class=\"pagination\"]//span[contains(., '" + ++countPage + "')]")).exists()) {
-            $(By.xpath("//ul[@class=\"pagination\"]//span[contains(., '" + countPage + "')]")).click();
-        } else {
-            System.out.println("Не найдена категория");
+        boolean exit = false;
+        while(!exit) {
+            if ($(byText(category.getName())).exists()) {
+                $(By.xpath("//tr[contains(., '" + category.getName() + "')]//a")).click();
+                break;
+            }
+            countPage++;
+            if ($(By.xpath("//ul[@class=\"pagination\"]//a[contains(., '" + countPage + "')]")).exists()) {
+                $(By.xpath("//ul[@class=\"pagination\"]//a[contains(., '" + countPage + "')]")).click();
+            } else {
+                exit = true;
+            }
         }
     }
 
+    public void findAndMarkCategory(Category category) {
+        int countPage = 1;
+        boolean exit = false;
+        while(!exit) {
+            if ($(byText(category.getName())).exists()) {
+                $(By.xpath("//tr[contains(., '" + category.getName() + "')]//input[@name=\"selected[]\"]")).click();
+                break;
+            }
+            countPage++;
+            if ($(By.xpath("//ul[@class=\"pagination\"]//a[contains(., '" + countPage + "')]")).exists()) {
+                $(By.xpath("//ul[@class=\"pagination\"]//a[contains(., '" + countPage + "')]")).click();
+            } else {
+                exit = true;
+            }
+        }
+    }
 }

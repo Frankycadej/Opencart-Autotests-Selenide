@@ -19,14 +19,14 @@ public class BaseTest {
         this.adminPassword = adminPassword;
         this.rootLink = rootLink;
         this.browser = browser;
-    }
-
-    @BeforeTest
-    public void configuration() {
         Configuration.baseUrl = rootLink;
         Configuration.browser = browser;
         Configuration.startMaximized = true;
         Configuration.timeout = 5000;
+    }
+
+    @BeforeTest
+    public void configuration() {
     }
 
     public void logStep(Integer num, String description) {

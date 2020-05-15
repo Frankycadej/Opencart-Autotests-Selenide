@@ -1,5 +1,6 @@
 package forms.admin;
 
+import com.codeborne.selenide.Selenide;
 import models.Category;
 import org.openqa.selenium.By;
 import webdriver.BaseForm;
@@ -15,7 +16,7 @@ public class CategoriesForm extends BaseForm {
 
     public void clickOnDeleteBtn() {
         $(By.xpath("//button[@data-original-title=\"Delete\"]/i")).click();
-        submitAlert();
+        Selenide.confirm();
     }
 
     public void findCategoryAndClickOnUpdateBtn(Category category) {

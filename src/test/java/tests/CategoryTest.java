@@ -60,7 +60,7 @@ public class CategoryTest extends BaseTest {
     }
 
     @Test(description = "Проверка отображения категории", dependsOnMethods = "createGroupTest")
-    @Description(value = "")
+    @Description(value = "Проверка отображения категории")
     public void readCategoryTest() {
         open("/");
 
@@ -69,7 +69,7 @@ public class CategoryTest extends BaseTest {
     }
 
     @Test(description = "Обновление категории", dependsOnMethods = "readCategoryTest")
-    @Description(value = "")
+    @Description(value = "Обновление категории")
     public void updateCategoryTest() {
 
         open("/admin");
@@ -96,7 +96,7 @@ public class CategoryTest extends BaseTest {
     }
 
     @Test(description = "Проверка отображения категории после обновления", dependsOnMethods = "updateCategoryTest")
-    @Description(value = "")
+    @Description(value = "Проверка отображения категории после обновления")
     public void readCategoryAfterUpdateTest() {
         open("/");
 
@@ -105,7 +105,7 @@ public class CategoryTest extends BaseTest {
     }
 
     @Test(description = "Удаление категории", dependsOnMethods = "readCategoryAfterUpdateTest", alwaysRun = true)
-    @Description(value = "")
+    @Description(value = "Удаление категории")
     public void deleteCategory() {
 
         open("/admin");
@@ -118,11 +118,12 @@ public class CategoryTest extends BaseTest {
         NavigationMenuForm navigationMenuForm = new NavigationMenuForm();
         navigationMenuForm.gotoPage("Catalog", "Categories");
 
-        logStep(3, "Find category in table");
-
-        logStep(4, "Mark checkbox");
+        logStep(3, "Find category in table and mark it");
+        CategoriesForm categoriesForm = new CategoriesForm();
+        categoriesForm.findAndMarkCategory(titleCategoryAfterUpdate);
 
         logStep(5, "Click on delete button");
+        categoriesForm.clickOnDeleteBtn();
     }
 
     @Test(description = "Проверка отображения категории после удаления", dependsOnMethods = "deleteCategory")

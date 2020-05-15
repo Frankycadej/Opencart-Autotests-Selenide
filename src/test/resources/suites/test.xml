@@ -8,7 +8,7 @@
     <parameter name="adminLogin" value="admin"/>
     <parameter name="adminPassword" value="GdfkvkrhjDH"/>
 
-    <test name="Создание категории">
+    <test name="Тест на создание, чтение, редактирование, удаления категории">
         <parameter name="titleCategory" value="Test category"/>
         <parameter name="metaTagTitleCategory" value="testMetaTagCategory"/>
         <parameter name="descriptionCategory" value="Test description"/>

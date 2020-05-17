@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import webdriver.BaseTest;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -19,6 +20,11 @@ public class RegistrationTest extends BaseTest {
         // Переход на страницу регистрации
         $(byText("My Account")).click();
         $(byText("Register")).click();
+
+        // Проверка отображения формы
+        $(byText("Register Account")).shouldHave(text("Register Account"));
+        $(byText("Your Personal Details")).shouldHave(text("Your Personal Details"));
+        
 
         // Заполнение форм
         $("#input-firstname").setValue("Test");

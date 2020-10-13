@@ -36,7 +36,7 @@ public class CategoryTest extends BaseTest {
     @Description(value = "Создание категории")
     public void createGroupTest() {
 
-        open("/admin");
+        open("https://opencart.nakoskin.ru/admin");
 
         logStep(1, "Login as admin");
         AdminLoginForm adminLoginForm = new AdminLoginForm();
@@ -62,7 +62,7 @@ public class CategoryTest extends BaseTest {
     @Test(description = "Проверка отображения категории", dependsOnMethods = "createGroupTest")
     @Description(value = "Проверка отображения категории")
     public void readCategoryTest() {
-        open("/");
+        open("https://opencart.nakoskin.ru/");
 
         logStep(1, "Check that category is visible");
         $(byText(category.getName())).shouldBe(Condition.visible);
@@ -72,7 +72,7 @@ public class CategoryTest extends BaseTest {
     @Description(value = "Обновление категории")
     public void updateCategoryTest() {
 
-        open("/admin");
+        open("https://opencart.nakoskin.ru/admin");
 
         logStep(1, "Login as admin");
         AdminLoginForm adminLoginForm = new AdminLoginForm();
@@ -97,7 +97,7 @@ public class CategoryTest extends BaseTest {
     @Test(description = "Проверка отображения категории после обновления", dependsOnMethods = "updateCategoryTest")
     @Description(value = "Проверка отображения категории после обновления")
     public void readCategoryAfterUpdateTest() {
-        open("/");
+        open("https://opencart.nakoskin.ru/");
 
         logStep(1, "Check that category is visible");
         $(byText(categoryAfterUpdate.getName())).shouldBe(Condition.visible);
@@ -107,7 +107,7 @@ public class CategoryTest extends BaseTest {
     @Description(value = "Удаление категории")
     public void deleteCategory() {
 
-        open("/admin");
+        open("https://opencart.nakoskin.ru/admin");
 
         logStep(1, "Login as admin");
         AdminLoginForm adminLoginForm = new AdminLoginForm();
@@ -129,7 +129,8 @@ public class CategoryTest extends BaseTest {
     @Test(description = "Проверка отображения категории после удаления", dependsOnMethods = "deleteCategory")
     @Description(value = "Проверка отображения категории после удаления")
     public void readCategoryAfterDeleteTest() {
-        open("/");
+        open("https://opencart.nakoskin.ru/");
+
         $(byText(categoryAfterUpdate.getName())).exists();
     }
 }

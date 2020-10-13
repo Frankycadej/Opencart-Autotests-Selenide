@@ -18,7 +18,7 @@ public class BaseTest {
         Configuration.baseUrl = rootLink;
         Configuration.driverManagerEnabled = false;
         Configuration.remote = "http://localhost:4444/wd/hub";
-        Configuration.browser = browser;
+        Configuration.browser = "firefox";
         Configuration.startMaximized = true;
         Configuration.timeout = 5000;
     }

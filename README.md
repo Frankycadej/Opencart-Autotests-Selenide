@@ -1,10 +1,9 @@
 # Opencart-Autotests-Selenide
 
-Автотесты для интернет магазина, использующего CMS Opencart.
+Autotests for CMS Opencart.
 
-Технологический стек:
+Tech stack:
 1. Java
 2. Selenide
 3. TestNG
 4. Allure
-5. AShot

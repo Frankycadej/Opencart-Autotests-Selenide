@@ -1,29 +1,21 @@
 package forms.admin;
 
-import models.Category;
-import org.openqa.selenium.By;
+import com.codeborne.selenide.SelenideElement;
 import webdriver.BaseForm;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class CreateCategoryForm extends BaseForm {
 
-    public void fillCreateForm(Category category) {
-        $("#input-name1").setValue(category.getName());
-        $("#input-meta-title1").setValue(category.getMetaTagTitle());
-        $("div.note-editable").setValue(category.getDescription());
-        if (category.isTop()) {
-            gotoTab("Data");
-            $("#input-top").click();
-        }
-    }
+    public final SelenideElement nameField = $("#input-name1"),
+            titleField = $("#input-meta-title1"),
+            noteField = $("div.note-editable"),
+            topCheckbox = $("#input-top"),
+            saveButton = $x("//button[@data-original-title='Save']");
 
-    public void gotoTab(String title) {
-        $(byText(title)).click();
-    }
-
-    public void saveCreateForm() {
-        $(By.xpath("//button[@data-original-title=\"Save\"]")).click();
+    public SelenideElement getTabByTitle(String title) {
+        return $(byText(title));
     }
 }

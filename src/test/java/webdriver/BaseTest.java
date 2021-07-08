@@ -4,7 +4,7 @@ import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
-import static io.qameta.allure.Allure.step;
+import static com.codeborne.selenide.Selenide.open;
 
 public class BaseTest {
 
@@ -17,12 +17,17 @@ public class BaseTest {
         this.adminPassword = adminPassword;
         Configuration.baseUrl = rootLink;
         Configuration.driverManagerEnabled = false;
-        Configuration.remote = "http://localhost:4444/wd/hub";
+        //Configuration.remote = "http://localhost:4444/wd/hub";
         Configuration.browser = "firefox";
         Configuration.startMaximized = true;
         Configuration.timeout = 5000;
     }
 
-    public void logStep(Integer num, String description) { step(num + " " + description); }
+    protected void openAdminLoginPage() {
+        open("/admin");
+    }
 
+    protected void openMainPage() {
+        open("/");
+    }
 }

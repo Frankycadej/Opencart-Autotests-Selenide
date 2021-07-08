@@ -1,13 +1,12 @@
 package forms.admin;
 
 import com.codeborne.selenide.SelenideElement;
-import webdriver.BaseForm;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class CreateCategoryForm extends BaseForm {
+public class CreateCategoryForm {
 
     public final SelenideElement nameField = $("#input-name1"),
             titleField = $("#input-meta-title1"),

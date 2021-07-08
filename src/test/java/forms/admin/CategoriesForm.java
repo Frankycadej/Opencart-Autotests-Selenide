@@ -3,12 +3,11 @@ package forms.admin;
 import com.codeborne.selenide.SelenideElement;
 import models.Category;
 import org.openqa.selenium.By;
-import webdriver.BaseForm;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class CategoriesForm extends BaseForm {
+public class CategoriesForm {
 
     public final SelenideElement addNewBtn = $x("//a[@data-original-title='Add New']"),
             deleteBtn = $x("//button[@data-original-title='Delete']/i");

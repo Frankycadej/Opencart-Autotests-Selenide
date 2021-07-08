@@ -8,13 +8,7 @@
     <parameter name="adminLogin" value="admin"/>
     <parameter name="adminPassword" value="GdfkvkrhjDH"/>
 
-    <test name="Тест логина админом">
-        <classes>
-            <class name="tests.admin.LoginTest"/>
-        </classes>
-    </test>
-
-    <test name="Тест создания, чтения, редактирования, удаления категории">
+    <test name="Create, Read, Update, Delete Category">
         <parameter name="titleCategory" value="Test category"/>
         <parameter name="metaTagTitleCategory" value="testMetaTagCategory"/>
         <parameter name="descriptionCategory" value="Test description"/>

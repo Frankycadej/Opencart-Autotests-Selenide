@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 @Feature("WishList Test")
 public class WishListTest {
 
+    @Test
     public void accountRegister() {
         Allure.step("1. Нажать на My Account");
         Allure.step("2. Нажать на Register");
@@ -19,10 +20,11 @@ public class WishListTest {
             Allure.step("3.5 Отметить чекбокс Agree to the Privacy Policy");
             Allure.step("3.6 Нажать Continue");
         });
-        Allure.step("4. На новой странице нажать Continue");
+        Allure.step("4. На новой странице нажать Continue"); //TODO сделать отдельную страницу
         Allure.step("5. Проверить что загрузилась страница My Account");
     }
 
+    @Test
     public void shoppingCart() {
         Allure.step("1. Нажать Shopping Cart");
         Allure.step("2. Проверить что он пуст");
@@ -34,9 +36,10 @@ public class WishListTest {
         Allure.step("8. Проверить наличие MacBook");
         Allure.step("9. Нажать View Cart");
         Allure.step("10. Проверить наличие MacBook");
-        Allure.step("11. Нажать Continue");
+        Allure.step("11. Нажать Checkout");
     }
 
+    @Test
     public void wishlistCheck() { ////h1[contains(., 'My Wishlist')]
         Allure.step("1. Нажать Wish List");
         Allure.step("2. Проверить что пуст");
@@ -49,7 +52,8 @@ public class WishListTest {
         Allure.step("9. Проверить наличие товара в Wish List'е");
     }
 
-    public void desktopscheck() {
+    @Test
+    public void desktopsCheck() {
         Allure.step("1. Навестись на Desktops");
         Allure.step("2. Проверить выдвижение меню");
         Allure.step("3. Убрать курсор с Desktops");
@@ -61,27 +65,30 @@ public class WishListTest {
         Allure.step("9. Нажать Show all Desktops");
     }
 
-    public void homecheck() {
+    @Test
+    public void homeCheck() {
         Allure.step("1. Проверить наличие лого OpenCart");
-        Allure.step("2. Нажать на OpenCart");
+        Allure.step("2. Нажать на OpenCart"); //
         Allure.step("3. Проверить загрузку страницы home");
-        Allure.step("4. Проверить наличие кнопок в синей полосе", () -> {  //как правильно это называть?
-            Allure.step("4.1 Проверить наличие DeskTops");
-            Allure.step("4.2 Проверить наличие Laptops & Notebooks");
-            Allure.step("4.3 Проверить наличие Components");
-            Allure.step("4.4 Проверить наличие Tablets");
-            Allure.step("4.5 Проверить наличие Software");
-            Allure.step("4.6 Проверить наличие Phones & PDAs");
-            Allure.step("4.7 Проверить наличие Cameras");
-            Allure.step("4.8 Проверить наличие MP3 Players");
+        Allure.step("4. Проверить наличие кнопок в menubar", () -> { //
+            Allure.step("4.1 Проверить наличие DeskTops"); //
+            Allure.step("4.2 Проверить наличие Laptops & Notebooks"); //
+            Allure.step("4.3 Проверить наличие Components"); //
+            Allure.step("4.4 Проверить наличие Tablets"); //
+            Allure.step("4.5 Проверить наличие Software"); //
+            Allure.step("4.6 Проверить наличие Phones & PDAs"); //
+            Allure.step("4.7 Проверить наличие Cameras"); //
+            Allure.step("4.8 Проверить наличие MP3 Players"); //
                 });
         Allure.step("5. Проверить наличие двух товаров на главной");
         Allure.step("6. Проверить наличие товаров в Featured", () -> {
-            Allure.step("6.1 Наличие MacBook");
-            Allure.step("6.2 Наличие IPhone");
-            Allure.step("6.3 Наличие Apple Cinema 30");
-            Allure.step("6.4 Наличие Canon EOS 5D");
+            Allure.step("6.1 Наличие MacBook"); //
+            Allure.step("6.2 Наличие IPhone"); //
+            Allure.step("6.3 Наличие Apple Cinema 30"); //
+            Allure.step("6.4 Наличие Canon EOS 5D"); //
         });
         Allure.step("7. Проверить наличие списка брендов");
+
+        //TODO через xpath
     }
 }

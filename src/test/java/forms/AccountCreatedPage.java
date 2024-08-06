@@ -4,8 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class WishListPage {
+public class AccountCreatedPage {
 
-    public SelenideElement
-            continueWLPBtn = $x("//div[@class='text-end']/a");
+    public SelenideElement continueBtn = $x("//div[@class='text-end']/a");
 }

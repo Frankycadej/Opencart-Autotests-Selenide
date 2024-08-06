@@ -11,7 +11,9 @@ public class GeneralBtnList {
             registerBtn = $x("//a[contains(.,'Register')]"),
             shoppingCartBtn = $x("//span[contains(.,'Shopping Cart')]"),
             wishListBtn = $x("//span[contains(.,'Wish List')]"),
-            openCartLogoBtn = $x("//div[@id='logo']/a");
+            openCartLogoBtn = $x("//div[@id='logo']/a"),
+            itemsCostBtn = $x("//div[@id='header-cart']//button[@type='button']"),
+            viewcartBtn = $x("//p/a[contains(@href,'checkout/cart')]");
 
     public SelenideElement
             desktopsBtn = $x("//a[contains(.,'Desktops')]"),

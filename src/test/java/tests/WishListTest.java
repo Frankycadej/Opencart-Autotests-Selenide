@@ -88,7 +88,5 @@ public class WishListTest {
             Allure.step("6.4 Наличие Canon EOS 5D"); //
         });
         Allure.step("7. Проверить наличие списка брендов");
-
-        //TODO через xpath
     }
 }

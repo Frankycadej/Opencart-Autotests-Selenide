@@ -6,19 +6,14 @@ import org.testng.annotations.Parameters;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class BaseTest {
-
-    protected String adminLogin, adminPassword;
+public class NewTest {
 
     @BeforeTest
-    @Parameters({"adminLogin", "adminPassword", "rootLink", "browser"})
-    public void readParams(String adminLogin, String adminPassword, String rootLink, String browser) {
-        this.adminLogin = adminLogin;
-        this.adminPassword = adminPassword;
-        Configuration.baseUrl = rootLink;
+    public void readParams() {
+        Configuration.baseUrl = "localhost";
         Configuration.driverManagerEnabled = false;
         //Configuration.remote = "http://localhost:4444/wd/hub";
-        Configuration.browser = "firefox";
+        Configuration.browser = "chrome";
         Configuration.startMaximized = true;
         Configuration.timeout = 5000;
     }
@@ -28,6 +23,6 @@ public class BaseTest {
     }
 
     protected void openMainPage() {
-        open("/");
+        open("http://localhost/en-gb?route=common/home");
     }
 }

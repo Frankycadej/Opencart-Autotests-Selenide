@@ -7,5 +7,7 @@ import static com.codeborne.selenide.Selenide.$x;
 public class WishListPage {
 
     public SelenideElement
-            continueWLPBtn = $x("//div[@class='text-end']/a");
+            continueBtn = $x("//div[@class='text-end']/a"),
+            emptyWishList = $x("//div[@id='wishlist']/p"),
+            iphoneInWishList = $x("//td[@class='text-start']/a[contains(@href,'iphone')]");
 }

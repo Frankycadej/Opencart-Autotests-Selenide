@@ -16,12 +16,13 @@ public class GeneralBtnList {
             itemsCostBtn = $x("//div[@id='header-cart']//button[@type='button']"),
             viewCartBtn = $x("//p/a[contains(@href,'checkout/cart')]"),
             dropDownMenuItems = $x("//ul[contains(@class,'dropdown-menu-end')]"),
-            macbookInItemsMenu = $x("//td[@class='text-start']/a[contains(@href,'macbook')]");
+            macbookInItemsMenu = $x("//td[@class='text-start']/a[contains(@href,'macbook')]"),
+            alertAddTodWishList = $x("//div[@id='alert']");
 
     public SelenideElement
             narbarMenu = $x("//div[@id='narbar-menu']"),
             desktopsBtn = $x("//a[contains(.,'Desktops')]"),
-            desktopsDropDownMenu = $x("//div[@class='dropdown-menu show']"),
+            desktopsDropDownMenu = $x("//a[contains(@href,'desktops/pc')]/../../../.."),
             showAllDesktopsBtn = $x(" //a[@class='see-all' and contains(@href,'desktops')]"),
             laptopsAndNotebooksBtn = $x("//a[contains(@href,'laptop-notebook') and @class='nav-link dropdown-toggle']"),
             componentsBtn = $x("//a[contains(@href,'component') and @class='nav-link dropdown-toggle']"),

@@ -10,5 +10,6 @@ public class ShoppingCartPage {
             continueSCPBtn = $x("//div[@class='text-end']/a"),
             checkoutSCPBtn = $x("//a[contains(@href,'checkout/checkout') and contains(@class,'btn')]"),
             emptyShoppingCart = $x("//div[@id='content']//p"),
-            macbookInShoppingCart = $x("//td[@class='text-start text-wrap']/a[contains(@href,'macbook')]");
+            macbookInShoppingCart = $x("//td[@class='text-start text-wrap']/a[contains(@href,'macbook')]"),
+            removeProduct = $x("//button[@aria-label='Remove']");
 }

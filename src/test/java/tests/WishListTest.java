@@ -5,30 +5,24 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.Test;
-import steps.HomePageSteps;
-import steps.admin.*;
+import utils.GeneralUtils;
 import webdriver.NewTest;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 
 @Feature("WishList Test")
 public class WishListTest extends NewTest {
-    private final AdminLoginFormSteps adminLoginFormSteps = new AdminLoginFormSteps();
-    private final NavigationMenuFormSteps navigationMenuFormSteps = new NavigationMenuFormSteps();
-    private final CategoriesFormSteps categoriesFormSteps = new CategoriesFormSteps();
-    private final CreateCategoryFormSteps createCategoryFormSteps = new CreateCategoryFormSteps();
-    private final UpdateCategoryFormSteps updateCategoryFormSteps = new UpdateCategoryFormSteps();
-    private final HomePageSteps homePageSteps = new HomePageSteps();
     private final AccountCreatedPage accountCreatedPage = new AccountCreatedPage();
     private final GeneralBtnList generalBtnList = new GeneralBtnList();
+    private final GeneralUtils generalUtils = new GeneralUtils();
+    private final HomePage homePage = new HomePage();
+    private final MyAccountPage myAccountPage = new MyAccountPage();
     private final ProductPage productPage = new ProductPage();
     private final RegisterPage registerPage = new RegisterPage();
     private final ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
     private final WishListPage wishListPage = new WishListPage();
-    private final MyAccountPage myAccountPage = new MyAccountPage();
-    private final HomePage homePage = new HomePage();
-    private final LoginPage loginPage = new LoginPage();
 
     @Test
     @Feature("allure")
@@ -46,7 +40,7 @@ public class WishListTest extends NewTest {
             Allure.step("3.2 Ввести значение Last Name");
             registerPage.lastNameField.sendKeys("ynish");
             Allure.step("3.3 Ввести значение E-Mail");
-            registerPage.emailField.sendKeys("hjaawafsdsah@gmail.com"); //RandomStringUtils.random(3)+
+            registerPage.emailField.sendKeys(RandomStringUtils.randomPrint(3) + "dsah@gmail.com");
             Allure.step("3.4 Ввести значение Password");
             registerPage.passwordField.sendKeys("drty");
             Allure.step("3.5 Отметить чекбокс Agree to the Privacy Policy");
@@ -66,7 +60,7 @@ public class WishListTest extends NewTest {
         Allure.step("1. Нажать Shopping Cart");
         generalBtnList.shoppingCartBtn.click();
         Allure.step("2. Проверить что он пуст");
-        shoppingCartPage.emptyShoppingCart.shouldHave();
+        shoppingCartPage.emptyShoppingCart.shouldHave(text("Your shopping cart is empty!"));
         Allure.step("3. Нажать Continue");
         shoppingCartPage.continueSCPBtn.click();
         Allure.step("4. Нажать на MacBook");
@@ -76,32 +70,26 @@ public class WishListTest extends NewTest {
         Allure.step("6. Нажать на 1 item(s)");
         generalBtnList.itemsCostBtn.click();
         Allure.step("7. Проверить выпадающие меню");
-        generalBtnList.dropDownMenuItems.shouldHave();
+        generalBtnList.dropDownMenuItems.should(exist);
         Allure.step("8. Проверить наличие MacBook в n item(s)");
-        generalBtnList.macbookInItemsMenu.shouldHave();
+        generalBtnList.macbookInItemsMenu.shouldHave(text("MacBook"));
         Allure.step("9. Нажать View Cart");
         generalBtnList.viewCartBtn.click();
         Allure.step("10. Проверить наличие MacBook в корзине");
-        shoppingCartPage.macbookInShoppingCart.shouldHave();
-        Allure.step("11. Нажать Checkout");
-        shoppingCartPage.checkoutSCPBtn.click();
-        System.out.println("42");
+        shoppingCartPage.macbookInShoppingCart.shouldHave(text("MacBook"));
+        Allure.step("11. Удалить MacBook");
+        shoppingCartPage.removeProduct.click();
     }
 
     @Test
-    public void wishlistCheck() { ////h1[contains(., 'My Wishlist')]
+    public void wishlistCheck() {
         openMainPage();
-        generalBtnList.myAccountBtn.click();
-        generalBtnList.loginBtn.click();
-        registerPage.emailField.sendKeys("hjaawafsdsah@gmail.com");
-        registerPage.passwordField.sendKeys("drty"); //TODO хочется вывести отдельно
-        loginPage.loginConfirmBtn.click();
-        generalBtnList.openCartLogoBtn.click();
+        generalUtils.loginIn("hjaawafsdsah@gmail.com", "drty");
         Allure.step("1. Нажать Wish List");
         generalBtnList.wishListBtn.click();
         Allure.step("2. Проверить что пуст");
-        wishListPage.emptyWishList.shouldHave();
-        Allure.step("3. Нажать Continue"); //почти бесполезно
+        wishListPage.emptyWishList.shouldHave(text("Your wish list is empty."));
+        Allure.step("3. Нажать Continue");
         wishListPage.continueBtn.click();
         Allure.step("4. Нажать Opencart");
         generalBtnList.openCartLogoBtn.click();
@@ -109,11 +97,14 @@ public class WishListTest extends NewTest {
         homePage.iPhoneBtn.click();
         Allure.step("6. Нажать Add to Wishlist(иконка сердечка)");
         productPage.addToWishListBtn.click();
-//        Allure.step("7. Проверить что цифра в скобочках у Wish List'a поменялась");//она кстати не меняется
+        Allure.step("7. Убрать оповещение");
+        generalBtnList.alertAddTodWishList.click();
         Allure.step("8. Нажать Wish List");
         generalBtnList.wishListBtn.click();
-        Allure.step("9. Проверить наличие iPhone в Wish List'е"); //
-        wishListPage.iphoneInWishList.shouldHave();
+        Allure.step("9. Проверить наличие iPhone в Wish List'е");
+        wishListPage.iphoneInWishList.shouldHave(text("iPhone"));
+        Allure.step("10. Удалить iPhone");
+        wishListPage.removeProduct.click();
     }
 
     @Test
@@ -122,19 +113,17 @@ public class WishListTest extends NewTest {
         Allure.step("1. Навестись на Desktops");
         generalBtnList.desktopsBtn.hover();
         Allure.step("2. Проверить выдвижение меню");
-        generalBtnList.desktopsDropDownMenu.shouldHave();
+        generalBtnList.desktopsDropDownMenu.should(visible);
         Allure.step("3. Убрать курсор с Desktops");
-        generalBtnList.openCartLogoBtn.hover(); //TODO
+        generalBtnList.openCartLogoBtn.hover();
         Allure.step("4. Проверить что выпадающее меню пропало");
-        generalBtnList.desktopsDropDownMenu.shouldNotHave();
-//        Allure.step("5. Навестись на Desktops"); //это ведь не нужно
-//        generalBtnList.desktopsBtn.hover();
+        generalBtnList.desktopsDropDownMenu.shouldNot(visible);
         Allure.step("6. Нажать на Desktops");
         generalBtnList.desktopsBtn.click();
         Allure.step("7. Убрать курсор с Desktops");
         generalBtnList.openCartLogoBtn.hover();
         Allure.step("8. Проверить что выпадающее меню осталось");
-        generalBtnList.desktopsDropDownMenu.shouldHave();
+        generalBtnList.desktopsDropDownMenu.should(visible);
         Allure.step("9. Нажать Show all Desktops");
         generalBtnList.showAllDesktopsBtn.click();
     }
@@ -143,55 +132,42 @@ public class WishListTest extends NewTest {
     public void homeCheck() {
         openMainPage();
         Allure.step("1. Проверить наличие лого OpenCart");
-        generalBtnList.openCartLogoBtn.shouldHave();
+        generalBtnList.openCartLogoBtn.should(visible);
         Allure.step("2. Нажать на OpenCart");
         generalBtnList.openCartLogoBtn.click();
         Allure.step("4. Проверить наличие кнопок в menubar", () -> {
-            generalBtnList.narbarMenu.shouldHave();
-            Allure.step("4.1 Проверить наличие DeskTops"); //
-            generalBtnList.desktopsBtn.shouldHave();
-            generalBtnList.desktopsBtn.hover();
-            Allure.step("4.2 Проверить наличие Laptops & Notebooks"); //
-            generalBtnList.laptopsAndNotebooksBtn.shouldHave();
-            generalBtnList.laptopsAndNotebooksBtn.hover();
-            Allure.step("4.3 Проверить наличие Components"); //
-            generalBtnList.componentsBtn.shouldHave();
-            generalBtnList.componentsBtn.hover();
-            Allure.step("4.4 Проверить наличие Tablets"); //
-            generalBtnList.tabletsBtn.shouldHave();
-            generalBtnList.tabletsBtn.hover();
-            Allure.step("4.5 Проверить наличие Software"); //
-            generalBtnList.softwareBtn.shouldHave();
-            generalBtnList.softwareBtn.hover();
-            Allure.step("4.6 Проверить наличие Phones & PDAs"); //
-            generalBtnList.phonesAndPDAsBtn.shouldHave();
-            generalBtnList.phonesAndPDAsBtn.hover();
-            Allure.step("4.7 Проверить наличие Cameras"); //
-            generalBtnList.camerasBtn.shouldHave();
-            generalBtnList.camerasBtn.hover();
-            Allure.step("4.8 Проверить наличие MP3 Players"); //
-            generalBtnList.mp3PlayersBtn.shouldHave();
-            generalBtnList.mp3PlayersBtn.hover(); //
-                });
-        generalBtnList.openCartLogoBtn.hover();
+            generalBtnList.narbarMenu.should(visible);
+            Allure.step("4.1 Проверить наличие DeskTops");
+            generalBtnList.desktopsBtn.should(visible);
+            Allure.step("4.2 Проверить наличие Laptops & Notebooks");
+            generalBtnList.laptopsAndNotebooksBtn.should(visible);
+            Allure.step("4.3 Проверить наличие Components");
+            generalBtnList.componentsBtn.should(visible);
+            Allure.step("4.4 Проверить наличие Tablets");
+            generalBtnList.tabletsBtn.should(visible);
+            Allure.step("4.5 Проверить наличие Software");
+            generalBtnList.softwareBtn.should(visible);
+            Allure.step("4.6 Проверить наличие Phones & PDAs");
+            generalBtnList.phonesAndPDAsBtn.should(visible);
+            Allure.step("4.7 Проверить наличие Cameras");
+            generalBtnList.camerasBtn.should(visible);
+            Allure.step("4.8 Проверить наличие MP3 Players");
+            generalBtnList.mp3PlayersBtn.should(visible);
+        });
         Allure.step("5. Проверить наличие двух товаров на главной");
-        homePage.imgInHomePageNumber1.shouldHave();
-        homePage.imgInHomePageNumber2.shouldHave();
+        homePage.imgInHomePageNumber1.should(visible);
+        homePage.imgInHomePageNumber2.should(visible);
         Allure.step("6. Проверить наличие товаров в Featured", () -> {
-            Allure.step("6.1 Наличие MacBook"); //
-            homePage.macBookBtn.shouldHave();
-            homePage.macBookBtn.hover();
-            Allure.step("6.2 Наличие IPhone"); //
-            homePage.iPhoneBtn.shouldHave();
-            homePage.iPhoneBtn.hover();
-            Allure.step("6.3 Наличие Apple Cinema 30"); //
-            homePage.appleCinema30.shouldHave();
-            homePage.appleCinema30.hover();
-            Allure.step("6.4 Наличие Canon EOS 5D"); //
-            homePage.canonEOS5D.shouldHave();
-            homePage.canonEOS5D.hover();
-                });
+            Allure.step("6.1 Наличие MacBook");
+            homePage.macBookBtn.should(visible);
+            Allure.step("6.2 Наличие IPhone");
+            homePage.iPhoneBtn.should(visible);
+            Allure.step("6.3 Наличие Apple Cinema 30");
+            homePage.appleCinema30.should(visible);
+            Allure.step("6.4 Наличие Canon EOS 5D");
+            homePage.canonEOS5D.should(visible);
+        });
         Allure.step("7. Проверить наличие списка брендов");
-        homePage.carouselWithBrands.shouldHave();
+        homePage.carouselWithBrands.should(visible);
     }
 }

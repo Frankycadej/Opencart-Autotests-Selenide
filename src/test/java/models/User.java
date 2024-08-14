@@ -1,20 +1,13 @@
 package models;
 
+import lombok.Data;
+
+@Data
 public class User {
 
-    private final String login;
     private final String password;
+    private final String email;
+    private final String firstname;
+    private final String lastname;
 
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }

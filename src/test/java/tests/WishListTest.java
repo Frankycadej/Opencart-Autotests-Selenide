@@ -5,7 +5,9 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import models.User;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import utils.GeneralUtils;
 import webdriver.NewTest;
@@ -23,6 +25,17 @@ public class WishListTest extends NewTest {
     private final RegisterPage registerPage = new RegisterPage();
     private final ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
     private final WishListPage wishListPage = new WishListPage();
+    private User user;
+
+    @BeforeTest
+    public void precondition() {
+        String email = RandomStringUtils.random(5, true, true);
+        email = email + "@gmail.com";
+        String firstname = RandomStringUtils.random(6, true ,true);
+        String lastname = RandomStringUtils.random(5, true, true);
+        String password = RandomStringUtils.random(5, true, true);
+        user = new User(password, email, firstname, lastname);
+    }
 
     @Test
     @Feature("allure")
@@ -84,7 +97,7 @@ public class WishListTest extends NewTest {
     @Test
     public void wishlistCheck() {
         openMainPage();
-        generalUtils.loginIn("hjaawafsdsah@gmail.com", "drty");
+        generalUtils.registerIn(user);
         Allure.step("1. Нажать Wish List");
         generalBtnList.wishListBtn.click();
         Allure.step("2. Проверить что пуст");

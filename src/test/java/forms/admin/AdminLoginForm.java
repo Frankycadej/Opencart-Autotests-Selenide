@@ -13,10 +13,4 @@ public class AdminLoginForm {
             passwordField = $(By.name("password")),
             loginBtn = $(byText("Login"));
 
-    public void login(User user) {
-        $(By.name("username")).setValue(user.getLogin());
-        $(By.name("password")).setValue(user.getPassword());
-        $(byText("Login")).click();
-    }
-
 }

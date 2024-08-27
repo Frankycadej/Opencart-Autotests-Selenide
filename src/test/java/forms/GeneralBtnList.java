@@ -17,7 +17,7 @@ public class GeneralBtnList {
             viewCartBtn = $x("//p/a[contains(@href,'checkout/cart')]"),
             dropDownMenuItems = $x("//ul[contains(@class,'dropdown-menu-end')]"),
             macbookInItemsMenu = $x("//td[@class='text-start']/a[contains(@href,'macbook')]"),
-            alertAddTodWishList = $x("//div[@id='alert']");
+            alertAddTodWishList = $x("//div[@id='alert']/div[contains(@class,'alert')]/button");
 
     public SelenideElement
             narbarMenu = $x("//div[@id='narbar-menu']"),

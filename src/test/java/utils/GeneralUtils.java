@@ -7,10 +7,10 @@ import forms.RegisterPage;
 import models.User;
 
 public class GeneralUtils {
-    private final LoginPage loginPage = new LoginPage();
-    private final GeneralBtnList generalBtnList = new GeneralBtnList();
-    private final RegisterPage registerPage = new RegisterPage();
     private final AccountCreatedPage accountCreatedPage = new AccountCreatedPage();
+    private final GeneralBtnList generalBtnList = new GeneralBtnList();
+    private final LoginPage loginPage = new LoginPage();
+    private final RegisterPage registerPage = new RegisterPage();
 
     public void loginIn(String email, String password) {
         generalBtnList.myAccountBtn.click();

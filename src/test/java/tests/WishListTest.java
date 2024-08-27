@@ -111,7 +111,7 @@ public class WishListTest extends NewTest {
         Allure.step("6. Нажать Add to Wishlist(иконка сердечка)");
         productPage.addToWishListBtn.click();
         Allure.step("7. Убрать оповещение");
-        generalBtnList.alertAddTodWishList.click(); //TODO
+        generalBtnList.alertAddTodWishList.click();
         Allure.step("8. Нажать Wish List");
         generalBtnList.wishListBtn.click();
         Allure.step("9. Проверить наличие iPhone в Wish List'е");
